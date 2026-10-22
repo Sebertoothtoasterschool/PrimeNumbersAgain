@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
 namespace PrimeNumbersAgain;
@@ -36,7 +36,37 @@ class Program
     /// <returns>The prime at position <paramref name="n"/> once implemented; currently returns 0 as a placeholder.</returns>
     static int FindNthPrime(int n)
     {
-        return 0;
+        int limit = 35000000;
+
+bool[] composite = new bool[limit + 1];
+
+for (int i = 2; i * i <= limit; i++)
+{
+    if (composite[i] == false)
+    {
+        for (int j = i * i; j <= limit; j = j + i)
+        {
+            composite[j] = true;
+        }
+    }
+}
+
+int count = 0;
+
+for (int i = 2; i <= limit; i++)
+{
+    if (composite[i] == false)
+    {
+        count++;
+
+        if (count == n)
+        {
+            return i;
+        }
+    }
+}
+
+return -1;
     }
 
     /// <summary>
